@@ -1,0 +1,7 @@
+.venv/
+
+
+// models 
+*.h5
+*.keras
+*.pkl
