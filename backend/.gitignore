@@ -1,7 +1,9 @@
 .venv/
 
-
-// models 
 *.h5
 *.keras
 *.pkl
+
+.env
+
+__pycache__/

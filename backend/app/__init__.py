@@ -1,10 +1,13 @@
+import os
 from flask import Flask
 from flask_cors import CORS
+from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
 
 
-app=Flask(__name__)
-CORS(app)
+def create_app():
+    app=Flask(__name__)
+    CORS(app)
 
 
-if __name__=="__main__":
-    app.run(debug=True,port=5000)
+    return app
