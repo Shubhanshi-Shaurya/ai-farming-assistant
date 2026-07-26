@@ -91,4 +91,55 @@ def plant_predict(image):
 
 
 # ROUTES 
+# cattle predictor route
+@app.route("/cattle_predict",method=["POST"])
+def cattle_predict_api():
+    if "image" not in request.files:
+        return jsonify({"error": "No image uploaded"}), 400
 
+    file=request.files["image"]
+    image=Image.open(file)
+
+    predicted_breed,confidence=cattle_predict(image)
+    local_info=BREED_INFO.get(predicted_breed,{})
+    wiki_info=get_wikipedia_info(predicted_breed)
+
+    return jsonify({
+        "breed":predicted_breed,
+        "confidence":round(confidence*100,2),
+        "details":{
+            "origin":
+            local_info.get("origin","Not Available"),
+            "purpose":
+                local_info.get("purpose","Not Available"),
+            "milkYield":
+                local_info.get("milkYield","Not Available"),
+            "color":
+                local_info.get("color","Not Available"),
+            "description":
+                local_info.get("description",wiki_info["summary"]),
+            "wikiSummary":
+                wiki_info.get["summary"],
+            "image":
+                wiki_info.get["image"],
+            "wikipedia":
+                wiki_info["wiki"]
+        }
+    })
+
+
+# plant disease predictor route
+@app.route("/disease_predict",method=["POST"])
+def disease_predict():
+    if "image" not in request.files:
+            return jsonify({"error": "No image uploaded"}), 400
+    
+    file=request.files["image"]
+    image=Image.open(file)
+    
+    predicted_disease,confidence=plant_predict(image)
+
+    return jsonify({
+        "disease":predicted_disease,
+        "confidence":round(confidence*100,2)
+    })
