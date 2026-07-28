@@ -1,0 +1,506 @@
+/* ----------------------------- */
+/* Main Container */
+/* ----------------------------- */
+
+.container{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+    background:#f4f7fb;
+    box-sizing:border-box;
+}
+
+/* ----------------------------- */
+
+.card{
+    width:100%;
+    max-width:850px;
+    background:#ffffff;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+/* ----------------------------- */
+
+.title{
+    margin:0;
+    font-size:32px;
+    text-align:center;
+    color:#1f2937;
+}
+
+.subtitle{
+    margin-top:10px;
+    text-align:center;
+    color:#6b7280;
+    margin-bottom:35px;
+}
+
+/* ----------------------------- */
+/* Upload Area */
+/* ----------------------------- */
+
+.uploadBox{
+
+    border:3px dashed #4f8df5;
+
+    border-radius:16px;
+
+    padding:45px;
+
+    text-align:center;
+
+    background:#f9fbff;
+
+    transition:.3s;
+
+    cursor:pointer;
+}
+
+.uploadBox:hover{
+
+    background:#eef5ff;
+
+    transform:translateY(-3px);
+}
+
+.uploadIcon{
+
+    font-size:60px;
+
+    margin-bottom:15px;
+}
+
+.uploadBox p{
+
+    margin:10px 0;
+
+    font-size:20px;
+
+    font-weight:600;
+}
+
+.uploadBox span{
+
+    display:block;
+
+    margin:15px;
+
+    color:#666;
+}
+
+/* ----------------------------- */
+
+.button{
+
+    display:inline-block;
+
+    padding:12px 26px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.button:hover{
+
+    background:#1d4ed8;
+}
+
+/* ----------------------------- */
+/* Preview */
+/* ----------------------------- */
+
+.previewContainer{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+}
+
+.preview{
+
+    width:100%;
+
+    max-width:420px;
+
+    border-radius:14px;
+
+    margin-bottom:25px;
+
+    object-fit:cover;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+/* ----------------------------- */
+
+.actionRow{
+
+    display:flex;
+
+    gap:15px;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+}
+
+/* ----------------------------- */
+
+.predictBtn{
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 28px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+}
+
+.predictBtn:hover{
+
+    background:#15803d;
+}
+
+.predictBtn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+}
+
+/* ----------------------------- */
+
+.removeBtn{
+
+    background:#ef4444;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 24px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.removeBtn:hover{
+
+    background:#dc2626;
+}
+
+/* ----------------------------- */
+/* Error */
+/* ----------------------------- */
+
+.error{
+
+    margin-top:25px;
+
+    padding:15px;
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    border-radius:10px;
+
+    text-align:center;
+}
+
+/* ----------------------------- */
+/* Loader */
+/* ----------------------------- */
+
+.loaderArea{
+
+    margin-top:35px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+}
+
+.loader{
+
+    width:55px;
+
+    height:55px;
+
+    border:6px solid #dbeafe;
+
+    border-top:6px solid #2563eb;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+    }
+}
+
+.loaderArea p{
+
+    margin-top:18px;
+
+    color:#444;
+}
+
+/* ----------------------------- */
+/* Result Card */
+/* ----------------------------- */
+
+.resultCard{
+
+    margin-top:35px;
+
+    background:#f9fafb;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    border:1px solid #e5e7eb;
+}
+
+/* ----------------------------- */
+
+.resultHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    margin-bottom:18px;
+}
+
+.resultHeader h3{
+
+    margin:0;
+
+    color:#111827;
+
+    font-size:28px;
+}
+
+.resultHeader span{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#16a34a;
+}
+
+/* ----------------------------- */
+/* Progress */
+/* ----------------------------- */
+
+.progressBar{
+
+    height:12px;
+
+    background:#e5e7eb;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    margin-bottom:25px;
+}
+
+.progress{
+
+    height:100%;
+
+    background:linear-gradient(90deg,#22c55e,#15803d);
+
+    border-radius:50px;
+
+    transition:width .5s;
+}
+
+/* ----------------------------- */
+
+.breedImage{
+
+    width:100%;
+
+    max-height:350px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    margin-bottom:30px;
+}
+
+/* ----------------------------- */
+
+.infoGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+
+    gap:18px;
+
+    margin-bottom:25px;
+}
+
+.infoItem{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+
+.infoItem span{
+
+    display:block;
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    margin-bottom:8px;
+}
+
+.infoItem strong{
+
+    color:#111827;
+
+    font-size:16px;
+}
+
+/* ----------------------------- */
+
+.description{
+
+    margin-top:20px;
+
+    line-height:1.7;
+
+    color:#444;
+}
+
+.description h4{
+
+    margin-bottom:12px;
+}
+
+/* ----------------------------- */
+
+.wikiBtn{
+
+    margin-top:30px;
+
+    display:inline-block;
+
+    background:#2563eb;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 24px;
+
+    border-radius:8px;
+
+    transition:.3s;
+}
+
+.wikiBtn:hover{
+
+    background:#1d4ed8;
+}
+
+/* ----------------------------- */
+/* Responsive */
+/* ----------------------------- */
+
+@media(max-width:768px){
+
+.card{
+
+    padding:20px;
+}
+
+.title{
+
+    font-size:26px;
+}
+
+.preview{
+
+    max-width:100%;
+}
+
+.resultHeader{
+
+    flex-direction:column;
+
+    gap:12px;
+
+    align-items:flex-start;
+}
+
+.infoGrid{
+
+    grid-template-columns:1fr;
+}
+
+.actionRow{
+
+    width:100%;
+
+    flex-direction:column;
+}
+
+.predictBtn,
+.removeBtn{
+
+    width:100%;
+}
+}

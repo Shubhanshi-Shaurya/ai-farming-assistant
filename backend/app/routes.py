@@ -6,15 +6,22 @@ import numpy as np
 from tensorflow.keras.applications.resnet50 import preprocess_input
 import requests
 import os
-from data.breeds import BREED_INFO
+from app.data.breeds import BREED_INFO
 
 # flask engine blueprint
-app = Blueprint('main_routes', __name__)
+main_routes = Blueprint(
+    "main_routes",
+    __name__
+)
 
 #CATTLE CLASSIFIER MODEL
-cattle_model=tf.keras.models.load_models('\models\cattle_classifier.keras')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-with open("data/breed_classes.txt", "r") as f:
+cattle_model = tf.keras.models.load_model(
+    os.path.join(BASE_DIR, "models", "cattle_classifier.keras")
+)
+
+with open("app/data/breed_classes.txt", "r") as f:
     cattle_names = [line.strip() for line in f]
 
 def get_wikipedia_info(breed_name):
@@ -64,7 +71,9 @@ def cattle_predict(image):
 
 
 # PLANT DISEASE CLASSIFIER
-plant_model=tf.keras.models.load_models('\models\disease_classifier.h5')
+plant_model = tf.keras.models.load_model(
+    os.path.join(BASE_DIR, "models", "disease_classifier.h5")
+)
 
 def load_class_labels():
     labels_file = "data/plant_classes.txt"
@@ -92,7 +101,7 @@ def plant_predict(image):
 
 # ROUTES 
 # cattle predictor route
-@app.route("/cattle_predict",method=["POST"])
+@main_routes.route("/cattle_predict",methods=["POST"])
 def cattle_predict_api():
     if "image" not in request.files:
         return jsonify({"error": "No image uploaded"}), 400
@@ -117,11 +126,11 @@ def cattle_predict_api():
             "color":
                 local_info.get("color","Not Available"),
             "description":
-                local_info.get("description",wiki_info["summary"]),
+                local_info.get("description",wiki_info["summary"]), 
             "wikiSummary":
-                wiki_info.get["summary"],
+                wiki_info.get("summary"),
             "image":
-                wiki_info.get["image"],
+                wiki_info.get("image"),
             "wikipedia":
                 wiki_info["wiki"]
         }
@@ -129,7 +138,7 @@ def cattle_predict_api():
 
 
 # plant disease predictor route
-@app.route("/disease_predict",method=["POST"])
+@main_routes.route("/disease_predict",methods=["POST"])
 def disease_predict():
     if "image" not in request.files:
             return jsonify({"error": "No image uploaded"}), 400

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HomeTab from './components/HomeTab';
+import CattleClassifier from "./components/cattle_classifier";
 
 
 const baseContent = {
@@ -28,7 +29,10 @@ function MainLayout(){
     document.documentElement.classList.toggle('dark', darkMode);
   }, [darkMode]);
 
-
-
-
 }
+
+function App() {
+  return <CattleClassifier />;
+}
+
+export default App;
