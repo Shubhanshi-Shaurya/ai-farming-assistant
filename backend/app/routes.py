@@ -1,7 +1,7 @@
 from flask import Flask,request, jsonify,Blueprint
 from flask_cors import CORS
 import tensorflow as tf
-from PIL import Image
+from PIL import Image,ImageOps
 import numpy as np
 from tensorflow.keras.applications.resnet50 import preprocess_input
 import requests
@@ -71,9 +71,8 @@ def cattle_predict(image):
 
 
 # PLANT DISEASE CLASSIFIER
-plant_model = tf.keras.models.load_model(
-    os.path.join(BASE_DIR, "models", "disease_classifier.h5")
-)
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'models', 'disease_classifier.h5')
+plant_model = tf.keras.models.load_model(MODEL_PATH)
 
 def load_class_labels():
     labels_file = "data/plant_classes.txt"

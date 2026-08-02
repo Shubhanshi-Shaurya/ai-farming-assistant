@@ -60,7 +60,6 @@ export default function CattleClassifier({
   };
 
   
-
   const handlePredict = async () => {
     if (!image) {
       setError("Please upload an image first.");
