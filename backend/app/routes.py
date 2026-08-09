@@ -7,12 +7,21 @@ from tensorflow.keras.applications.resnet50 import preprocess_input
 import requests
 import os
 from app.data.breeds import BREED_INFO
+import joblib
 
 # flask engine blueprint
 main_routes = Blueprint(
     "main_routes",
     __name__
 )
+
+# CROP RECOMMENDER MODEL 
+CROP_RECOMMENDER_MODEL=joblib.load("app/models/crop_recommender.pkl")
+ENCODER=joblib.load("app/models/crop_label_encoder.pkl")
+PREPROCESSOR=joblib.load("app/models/crop_yield_preprocessor.pkl")
+CROP_YIELD_MODEL=joblib.load("app/models/crop_yield_xgboost.pkl")
+
+
 
 #CATTLE CLASSIFIER MODEL
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -151,3 +160,7 @@ def disease_predict():
         "disease":predicted_disease,
         "confidence":round(confidence*100,2)
     })
+
+@main_routes.route("/crop_recommend",methods=['POST'])
+def crop_recommend():
+    pass
