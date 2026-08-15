@@ -8,6 +8,14 @@ import requests
 import os
 from app.data.breeds import BREED_INFO
 import joblib
+from dotenv import load_dotenv
+# from services.weather import fetch_weather
+# from services.yield_predictor import predict_yield
+from app.services.chatbot import get_bot_response
+
+
+# loading keys 
+load_dotenv()
 
 # flask engine blueprint
 main_routes = Blueprint(
@@ -15,16 +23,14 @@ main_routes = Blueprint(
     __name__
 )
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # CROP RECOMMENDER MODEL 
 CROP_RECOMMENDER_MODEL=joblib.load("app/models/crop_recommender.pkl")
 ENCODER=joblib.load("app/models/crop_label_encoder.pkl")
-PREPROCESSOR=joblib.load("app/models/crop_yield_preprocessor.pkl")
-CROP_YIELD_MODEL=joblib.load("app/models/crop_yield_xgboost.pkl")
-
 
 
 #CATTLE CLASSIFIER MODEL
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 cattle_model = tf.keras.models.load_model(
     os.path.join(BASE_DIR, "models", "cattle_classifier.keras")
@@ -161,6 +167,44 @@ def disease_predict():
         "confidence":round(confidence*100,2)
     })
 
-@main_routes.route("/crop_recommend",methods=['POST'])
-def crop_recommend():
-    pass
+
+# CHATBOT ROUTE 
+@main_routes.route('/api/chat', methods=['POST'])
+def chat():
+    try:
+        data = request.get_json()
+        user_message = data.get('message', '')
+        session_id = data.get('session_id', 'default_user')
+
+        # Call the imported function
+        reply = get_bot_response(user_message, session_id)
+
+        return jsonify({'reply': reply}), 200
+
+    except Exception as e:
+        print("Chat Error:", str(e))
+        return jsonify({'error': str(e)}), 500
+
+# CROP RECOMMEDER - WORKING 
+# @main_routes.route("/crop_recommend",methods=['POST'])
+# def crop_recommend():
+#     data=request.get_json()
+
+#     latitude=data["latitude"]
+#     longitude=data["longitude"]
+
+#     #
+#     weather=fetch_weather(latitude,longitude)
+
+#     N=data["N"]
+#     P=data["P"]
+#     K=data["K"]
+#     pH=data["pH"]
+
+#     rainfall=data["rainfall"]
+#     area=data["area"]
+#     fertilizer=data["fertilizer"]
+#     pesticide=data["pesticide"]
+
+    
+

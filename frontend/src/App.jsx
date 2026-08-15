@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import HomeTab from './components/HomeTab';
 import CattleClassifier from "./components/cattle_classifier";
 import DiseaseUploader from "./components/disease_classifier";
+import ChatbotWidget from './components/ChatbotWidget';
 
 const baseContent = {
   navTitle: "AI Farming Assistant",
@@ -79,6 +80,8 @@ function MainLayout() {
       }}>
         <p>{content.footer}</p>
       </footer>
+      {/* chatbot widget */}
+      <ChatbotWidget />
     </div>
   );
 }
