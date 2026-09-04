@@ -9,8 +9,8 @@ import os
 from app.data.breeds import BREED_INFO
 import joblib
 from dotenv import load_dotenv
-# from services.weather import fetch_weather
-# from services.yield_predictor import predict_yield
+from app.services.weather import fetch_weather
+from app.services.yield_predictor import predict_yield
 from app.services.chatbot import get_bot_response
 
 
@@ -185,26 +185,40 @@ def chat():
         print("Chat Error:", str(e))
         return jsonify({'error': str(e)}), 500
 
+
 # CROP RECOMMEDER - WORKING 
-# @main_routes.route("/crop_recommend",methods=['POST'])
-# def crop_recommend():
-#     data=request.get_json()
+@main_routes.route("/recommend",methods=['POST'])
+def recommend():
+    data=request.get_json()
 
-#     latitude=data["latitude"]
-#     longitude=data["longitude"]
+    latitude=data["latitude"]
+    longitude=data["longitude"]
 
-#     #
-#     weather=fetch_weather(latitude,longitude)
+    #
+    weather=fetch_weather(latitude,longitude)
 
-#     N=data["N"]
-#     P=data["P"]
-#     K=data["K"]
-#     pH=data["pH"]
+    features = {
+        "crop": data["crop"],
+        "year": data["year"],
+        "season": data["season"],
+        "state": data["state"],
+        "area": data["area"],
+        "fertilizer": data["fertilizer"],
+        "pesticide": data["pesticide"],
+        "N": data["N"],
+        "P": data["P"],
+        "K": data["K"],
+        "pH": data["pH"],
+        "avg_temp_c": weather["avg_temp_c"],
+        "total_rainfall_mm": data["rainfall"],
+        "avg_humidity_percent": weather["avg_humidity_percent"]
+    }
 
-#     rainfall=data["rainfall"]
-#     area=data["area"]
-#     fertilizer=data["fertilizer"]
-#     pesticide=data["pesticide"]
+    predicted_yield = predict_yield(features)
+
+    return jsonify({
+        "predicted_yield": predicted_yield
+    })
 
     
 

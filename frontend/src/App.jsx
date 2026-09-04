@@ -4,6 +4,8 @@ import HomeTab from './components/HomeTab';
 import CattleClassifier from "./components/cattle_classifier";
 import DiseaseUploader from "./components/disease_classifier";
 import ChatbotWidget from './components/ChatbotWidget';
+import CropRecommender from './components/CropRecommender';
+import AboutUs from './components/AboutUs';
 
 const baseContent = {
   navTitle: "AI Farming Assistant",
@@ -49,24 +51,29 @@ function MainLayout() {
   return (
     <div style={pageContainerStyle}>
       {/* Integrated Navbar Component */}
-      <Navbar 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
-        darkMode={darkMode} 
-        setDarkMode={setDarkMode} 
-        content={content} 
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        content={content}
       />
 
       {/* Dynamic Main Body */}
       <main style={mainContentStyle}>
         {activeTab === 'home' && (
-          <HomeTab 
-            onLaunch={() => setActiveTab('plant')} 
-            content={content} 
+          <HomeTab
+            content={content}
+            setActiveTab={setActiveTab}
           />
         )}
+
+        {/* tabs for navigation */}
+
         {activeTab === 'plant' && <DiseaseUploader />}
         {activeTab === 'cattle' && <CattleClassifier />}
+        {activeTab === 'crop' && <CropRecommender />}
+        {activeTab === 'about' && <AboutUs />}
       </main>
 
       {/* Footer */}
