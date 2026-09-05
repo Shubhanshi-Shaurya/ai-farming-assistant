@@ -99,6 +99,8 @@ npm run dev
 
 The application will be available at the local URL provided by React/Vite.
 
+---
+
 ##  Machine Learning
 
 The system uses machine learning models for:
